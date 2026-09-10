@@ -1,6 +1,6 @@
-# RAG Document Search
+# AI Career Profile Assistant
 
-A Streamlit-based career profile assistant designed to help users search and understand Jayant Prakash's professional experience, skills, education, projects, and accomplishments. It answers questions using local PDF documents, GitHub repository information, and Wikipedia while combining retrieval-augmented generation (RAG) with a LangGraph ReAct agent powered by OpenAI GPT-5.6 Terra.
+A Streamlit-based career profile assistant designed to help users search and understand Jayant Prakash's professional experience, skills, education, projects, and accomplishments. It answers questions using local PDF documents, GitHub repository information, while combining retrieval-augmented generation (RAG) with a LangGraph workflow powered by OpenAI GPT-5.6 Terra through a direct LLM call.
 
 Example questions include:
 
@@ -13,7 +13,7 @@ Example questions include:
 
 - Loads and indexes PDF, text, web, and GitHub profile content.
 - Retrieves relevant passages with OpenAI embeddings and FAISS.
-- Uses a ReAct agent with document-retrieval and Wikipedia tools.
+- Uses a LangGraph workflow with document retrieval followed by a direct LLM call.
 - Generates answers with GPT-5.6 Terra through the OpenAI Responses API.
 - Displays retrieved source passages and recent searches in Streamlit.
 - Caches the initialized RAG pipeline for faster follow-up questions.
@@ -27,10 +27,10 @@ flowchart LR
     C --> D[FAISS vector store]
     E[User question] --> F[LangGraph workflow]
     D --> F
-    F --> G[ReAct agent]
-    G --> H[Retriever tool]
-    G --> I[Wikipedia tool]
-    G --> J[GPT-5.6 Terra]
+    F --> G[Retriever]
+    G --> H[Retrieved context]
+    H --> I[Direct LLM call]
+    I --> J[GPT-5.6 Terra]
     J --> K[Answer and source passages]
 ```
 
@@ -125,7 +125,7 @@ CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 ```
 
-The model is initialized with `use_responses_api=True` because the ReAct agent uses function tools together with GPT-5.6 Terra reasoning.
+The model is initialized with `use_responses_api=True` and invoked directly after document retrieval to generate the final answer.
 
 To index different documents or a different GitHub profile, update the source paths and `github_url` in `initialize_rag()` inside `streamlit_app.py`.
 
@@ -144,7 +144,7 @@ RAG-Document-Search/
     ├── graph_builder/
     │   └── graph_builder.py         # LangGraph workflow
     ├── node/
-    │   └── reactnode.py             # Retriever/Wikipedia ReAct agent
+    │   └── nodes.py                 # Retriever and LLM response nodes
     ├── state/rag_state.py           # Workflow state model
     └── vectorstore/vectorstore.py   # OpenAI embeddings and FAISS index
 ```
