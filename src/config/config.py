@@ -15,7 +15,7 @@ class Config:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     
     # Model Configuration
-    LLM_MODEL = "openai:gpt-4o"
+    LLM_MODEL = "openai:gpt-5.6-terra"
     
     # Document Processing
     CHUNK_SIZE = 500
@@ -31,4 +31,4 @@ class Config:
     def get_llm(cls):
         """Initialize and return the LLM model"""
         os.environ["OPENAI_API_KEY"] = cls.OPENAI_API_KEY
-        return init_chat_model(cls.LLM_MODEL)
+        return init_chat_model(cls.LLM_MODEL, use_responses_api=True)

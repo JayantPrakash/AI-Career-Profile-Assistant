@@ -15,8 +15,8 @@ from src.graph_builder.graph_builder import GraphBuilder
 
 # Page configuration
 st.set_page_config(
-    page_title="🤖 RAG Search",
-    page_icon="🔍",
+    page_title="Jayant Prakash — Professional Profile",
+    page_icon="💼",
     layout="centered"
 )
 
@@ -53,11 +53,13 @@ def initialize_rag():
         )
         vector_store = VectorStore()
         
-        # Use default URLs
-        urls = Config.DEFAULT_URLS
-        
-        # Process documents
-        documents = doc_processor.process_urls(urls)
+        # Process the local PDFs and GitHub profile
+        resume_path = Path(__file__).parent / "src" / "data" / "Jayant_Prakash_Resume.pdf"
+        linkedin_profile_path = Path(__file__).parent / "src" / "data" / "LinkedInProfile.pdf"
+        github_url = "https://github.com/JayantPrakash?tab=repositories"
+        documents = doc_processor.process_urls(
+            [resume_path, linkedin_profile_path, github_url]
+        )
         
         # Create vector store
         vector_store.create_vectorstore(documents)
@@ -79,8 +81,10 @@ def main():
     init_session_state()
     
     # Title
-    st.title("🔍 RAG Document Search")
-    st.markdown("Ask questions about the loaded documents")
+    st.title("💼 Jayant Prakash — Career Profile Assistant")
+    st.markdown(
+        "Explore Jayant’s experience, skills, education, projects, and accomplishments."
+    )
     
     # Initialize system
     if not st.session_state.initialized:
@@ -97,7 +101,7 @@ def main():
     with st.form("search_form"):
         question = st.text_input(
             "Enter your question:",
-            placeholder="What would you like to know?"
+            placeholder="Ask about Jayant’s professional experience..."
         )
         submit = st.form_submit_button("🔍 Search")
     

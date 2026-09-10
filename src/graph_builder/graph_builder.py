@@ -2,7 +2,8 @@
 
 from langgraph.graph import StateGraph, END
 from src.state.rag_state import RAGState
-from src.node.reactnode import RAGNodes
+#from src.node.reactnode import RAGNodes
+from src.node.nodes import RAGNodes
 
 class GraphBuilder:
     """Builds and manages the LangGraph workflow"""

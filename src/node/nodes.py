@@ -1,6 +1,8 @@
 """LangGraph nodes for RAG workflow"""
 
 from src.state.rag_state import RAGState
+from langchain_core.messages import HumanMessage
+from typing import List, Optional
 
 class RAGNodes:
     """Contains node functions for RAG workflow"""
@@ -59,5 +61,5 @@ Question: {state.question}"""
         return RAGState(
             question=state.question,
             retrieved_docs=state.retrieved_docs,
-            answer=response.content
+            answer= str(response.text).strip()
         )    

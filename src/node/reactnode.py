@@ -92,7 +92,7 @@ class RAGNodes:
         answer: Optional[str] = None
         if messages:
             answer_msg = messages[-1]
-            answer = getattr(answer_msg, "content", None)
+            answer = str(answer_msg.text).strip()
 
         return RAGState(
             question=state.question,

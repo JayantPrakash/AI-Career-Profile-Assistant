@@ -3,6 +3,7 @@ langchain-community
 langchain-openai
 langgraph
 openai
+pypdf
 faiss-cpu
 pydantic
 python-dotenv
