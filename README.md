@@ -1,6 +1,10 @@
 # AI Career Profile Assistant
 
+<<<<<<< HEAD
 A Streamlit-based career profile assistant designed to help users search and understand Jayant Prakash's professional experience, skills, education, projects, and accomplishments. It answers questions using local PDF documents, GitHub repository information, while combining retrieval-augmented generation (RAG) with a LangGraph workflow powered by OpenAI GPT-5.6 Terra through a direct LLM call.
+=======
+A Streamlit-based career profile assistant designed to help users search and understand Jayant Prakash's professional experience, skills, education, projects, and accomplishments. It answers questions using local PDF documents, GitHub repository information, while combining retrieval-augmented generation (RAG) with a LangGraph ReAct agent powered by OpenAI GPT-5.6 Terra.
+>>>>>>> f23fe745f9ed05c18949830da7423973be2d4641
 
 Example questions include:
 
